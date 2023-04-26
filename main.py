@@ -1,18 +1,18 @@
-import mysql.connector
-from getpass import getpass
 from mysql.connector import connect, Error
+import datetime
+import clf
 
+now = datetime.datetime.now()
 try:
     with connect(
         host="127.0.0.1",
         user="root",
-        database="online_movie_rating"
+        database="timetable",
+        autocommit=True
     ) as connection:
-        query = """
-                CREATE TABLE test1(
-                    id INT PRIMARY KEY,
-                    name varchar(60)
-                )
+        query = f"""
+               INSERT INTO TIMETABLE1(create_time,body)
+               VALUES('{now.strftime('%Y-%m-%d %H:%M:%S')}','{str(clf.get()).replace("'",'"')}')
         """
         with connection.cursor() as cursor:
             cursor.execute(query)
